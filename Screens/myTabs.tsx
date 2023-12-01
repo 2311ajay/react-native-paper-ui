@@ -1,7 +1,8 @@
-import { StyleSheet, Text, View } from 'react-native';
-import { DrawerHeaderProps } from '@react-navigation/drawer';
+import { StyleSheet, Switch, Text, View } from 'react-native';
 import { createMaterialBottomTabNavigator } from 'react-native-paper/react-navigation';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import React from 'react';
+import { NotificationTab } from './myTabsScreens/NotificationScreen';
 
 const Tab = createMaterialBottomTabNavigator();
 
@@ -22,6 +23,8 @@ const DummyTabComponent2 = (text: string) => {
 }
 
 export default function MyTabs (props: any) {
+
+    const switchHook = React.useState<boolean>(true);
     return (
         <Tab.Navigator
           initialRouteName="Feed"
@@ -42,7 +45,7 @@ export default function MyTabs (props: any) {
           />
           <Tab.Screen
             name="Notifications"
-            children = {() => DummyTabComponent2('Notifications')}
+            children = {(p) => NotificationTab({...p, switchHook })}
             options={{
               tabBarLabel: 'Updates',
               tabBarIcon: ({ color }) => (
