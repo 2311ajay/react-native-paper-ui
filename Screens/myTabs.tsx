@@ -3,6 +3,8 @@ import { createMaterialBottomTabNavigator } from 'react-native-paper/react-navig
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import React from 'react';
 import { NotificationTab } from './myTabsScreens/NotificationScreen';
+import { GalleryTab } from './myTabsScreens/GalleryScreen';
+
 
 const Tab = createMaterialBottomTabNavigator();
 
@@ -25,6 +27,8 @@ const DummyTabComponent2 = (text: string) => {
 export default function MyTabs (props: any) {
 
     const switchHook = React.useState<boolean>(true);
+    const visibilityHook = React.useState(true);
+
     return (
         <Tab.Navigator
           initialRouteName="Feed"
@@ -33,13 +37,13 @@ export default function MyTabs (props: any) {
           barStyle={{ backgroundColor: '#694fad' }}
         >
           <Tab.Screen
-            name="Feed"
+            name="Gallery"
             // component={DummyTabComponent} this is when the component does not need props
-            children = {() => DummyTabComponent2('Feed')}
+            children = {(p) => GalleryTab({...p, visibilityHook })}
             options={{
-              tabBarLabel: 'Home',
+              tabBarLabel: 'Gallery',
               tabBarIcon: ({ color }) => (
-                <MaterialCommunityIcons name="home" color={color} size={26} />
+                <MaterialCommunityIcons name="image" color={color} size={26} />
               ),
             }}
           />
