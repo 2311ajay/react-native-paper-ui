@@ -7,6 +7,7 @@ import { FloatingActionButton } from './components/FloatingActionButton';
 import { DrawerHeaderProps, createDrawerNavigator } from '@react-navigation/drawer';
 import { NavigationContainer, ParamListBase, useNavigation } from '@react-navigation/native';
 import Home from './Screens/home';
+import MyTabs from './Screens/myTabs';
 
 export default function App() {
 
@@ -45,6 +46,7 @@ export default function App() {
       <NavigationContainer>
         <Drawer.Navigator initialRouteName="Home" screenOptions={{header: CustomHeader}}>
           <Drawer.Screen name="Home" component={Home} />
+          <Drawer.Screen name="MyTabs" component={MyTabs} />
         </Drawer.Navigator>
       </NavigationContainer>
     </PaperProvider>
