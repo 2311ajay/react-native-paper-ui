@@ -5,6 +5,7 @@ import React from 'react';
 import { NotificationTab } from './myTabsScreens/NotificationScreen';
 import { FolderTab } from './myTabsScreens/FolderScreen';
 import { ProfileTab } from './myTabsScreens/Profile';
+import { GalleryTab } from './myTabsScreens/GalleryScreen';
 
 
 const Tab = createMaterialBottomTabNavigator();
@@ -37,6 +38,17 @@ export default function MyTabs (props: any) {
           inactiveColor="#3e2465"
           barStyle={{ backgroundColor: '#694fad' }}
         >
+          <Tab.Screen
+            name="Gallery"
+            // component={DummyTabComponent} this is when the component does not need props
+            children = {(p) => GalleryTab({...p})}
+            options={{
+              // tabBarLabel: 'Gallery',
+              tabBarIcon: ({ color }) => (
+                <MaterialCommunityIcons name="image" color={color} size={26} />
+              ),
+            }}
+          />
           <Tab.Screen
             name="Folder"
             // component={DummyTabComponent} this is when the component does not need props
