@@ -3,8 +3,8 @@ import * as React from 'react';
 import { Image, View } from 'react-native';
 import { Banner, Button } from 'react-native-paper';
 
-export const GalleryTab = (props: {
-    route: RouteProp<ParamListBase, "Gallery">;
+export const ProfileTab = (props: {
+    route: RouteProp<ParamListBase, "Profile">;
     navigation: any;
     visibilityHook: [boolean, React.Dispatch<React.SetStateAction<boolean>>]
     }) => {

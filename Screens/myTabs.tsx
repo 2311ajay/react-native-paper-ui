@@ -3,7 +3,8 @@ import { createMaterialBottomTabNavigator } from 'react-native-paper/react-navig
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import React from 'react';
 import { NotificationTab } from './myTabsScreens/NotificationScreen';
-import { GalleryTab } from './myTabsScreens/GalleryScreen';
+import { FolderTab } from './myTabsScreens/FolderScreen';
+import { ProfileTab } from './myTabsScreens/Profile';
 
 
 const Tab = createMaterialBottomTabNavigator();
@@ -27,23 +28,23 @@ const DummyTabComponent2 = (text: string) => {
 export default function MyTabs (props: any) {
 
     const switchHook = React.useState<boolean>(true);
-    const visibilityHook = React.useState(true);
+    const expandedHook = React.useState(true);
 
     return (
         <Tab.Navigator
-          initialRouteName="Feed"
+          initialRouteName="Gallery"
           activeColor="#f0edf6"
           inactiveColor="#3e2465"
           barStyle={{ backgroundColor: '#694fad' }}
         >
           <Tab.Screen
-            name="Gallery"
+            name="Folder"
             // component={DummyTabComponent} this is when the component does not need props
-            children = {(p) => GalleryTab({...p, visibilityHook })}
+            children = {(p) => FolderTab({...p, expandedHook })}
             options={{
-              tabBarLabel: 'Gallery',
+              tabBarLabel: 'Folder',
               tabBarIcon: ({ color }) => (
-                <MaterialCommunityIcons name="image" color={color} size={26} />
+                <MaterialCommunityIcons name="folder" color={color} size={26} />
               ),
             }}
           />
@@ -59,7 +60,7 @@ export default function MyTabs (props: any) {
           />
           <Tab.Screen
             name="Profile"
-            children = {() => DummyTabComponent2('Profile')}
+            children = {(p) => ProfileTab({...p, visibilityHook: expandedHook })}
             options={{
               tabBarLabel: 'Profile',
               tabBarIcon: ({ color }) => (
