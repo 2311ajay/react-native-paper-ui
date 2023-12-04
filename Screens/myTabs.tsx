@@ -31,6 +31,8 @@ export default function MyTabs (props: any) {
     const switchHook = React.useState<boolean>(true);
     const modalVisibilityHook = React.useState<boolean>(false);
     const expandedHook = React.useState(true);
+    const uploadProgressHook = React.useState<number>(0);
+
 
     return (
         <Tab.Navigator
@@ -42,7 +44,7 @@ export default function MyTabs (props: any) {
           <Tab.Screen
             name="Gallery"
             // component={DummyTabComponent} this is when the component does not need props
-            children = {(p) => GalleryTab({...p, modalVisibilityHook})}
+            children = {(p) => GalleryTab({...p, modalVisibilityHook, uploadProgressHook})}
             options={{
               // tabBarLabel: 'Gallery',
               tabBarIcon: ({ color }) => (
