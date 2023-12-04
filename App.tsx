@@ -1,13 +1,12 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-import { PaperProvider } from 'react-native-paper';
-import { Drawer } from 'react-native-paper';
+import { Icon, PaperProvider, Button, Menu, Divider, } from 'react-native-paper';
 import { Appbar } from 'react-native-paper';
-import { FloatingActionButton } from './components/FloatingActionButton';
 import { DrawerHeaderProps, createDrawerNavigator } from '@react-navigation/drawer';
-import { NavigationContainer, ParamListBase, useNavigation } from '@react-navigation/native';
+import { NavigationContainer, ParamListBase } from '@react-navigation/native';
 import Home from './Screens/home';
 import MyTabs from './Screens/myTabs';
+import TableOfData from './Screens/DataTable';
+import * as React from 'react';
+
 
 export default function App() {
 
@@ -15,7 +14,17 @@ export default function App() {
 
   const _handleSearch = () => console.log('Searching');
 
-  const _handleMore = () => console.log('Shown more');
+  const _handleMore = () => {
+    console.log('Shown more');
+    setVisible(true);
+    console.log('Menu visible');
+  };
+
+  const [visible, setVisible] = React.useState(false);
+
+  const openMenu = () => setVisible(true);
+
+  const closeMenu = () => setVisible(false);
 
   const Drawer = createDrawerNavigator<ParamListBase>();
   // const navigation = useNavigation();
@@ -35,7 +44,24 @@ export default function App() {
           {/* <Appbar.BackAction onPress={_goBack} /> */}
           <Appbar.Content title="Title" />
           <Appbar.Action icon="magnify" onPress={_handleSearch} />
-          <Appbar.Action icon="dots-vertical" onPress={_handleMore} />
+          <Menu
+            visible={visible}
+            onDismiss={closeMenu}
+            anchor={<Appbar.Action icon="dots-vertical" onPress={_handleMore} />}
+            style={{
+              borderRadius: 30,
+              overflow: 'hidden'
+            }}
+            >
+            <Menu.Item leadingIcon="redo" onPress={() => {}} title="Redo" />
+            <Menu.Item leadingIcon="undo" onPress={() => {}} title="Undo" />
+            <Divider />
+            <Menu.Item leadingIcon="content-cut" onPress={() => {}} title="Cut" disabled />
+            <Menu.Item leadingIcon="content-copy" onPress={() => {}} title="Copy" disabled />
+            <Menu.Item leadingIcon="content-paste" onPress={() => {}} title="Paste" />
+            <Divider />
+            <Menu.Item trailingIcon="share-outline" onPress={() => {}} title="Share" />
+          </Menu>
         </Appbar.Header>
       </>
     )
@@ -44,9 +70,21 @@ export default function App() {
   return (
     <PaperProvider>
       <NavigationContainer>
-        <Drawer.Navigator initialRouteName="Home" screenOptions={{header: CustomHeader}}>
+        <Drawer.Navigator initialRouteName="TableOfData" screenOptions={{header: CustomHeader}}>
           <Drawer.Screen name="Home" component={Home} />
-          <Drawer.Screen name="MyTabs" component={MyTabs} />
+          <Drawer.Screen name="My Tabs" component={MyTabs} />
+          <Drawer.Screen 
+            name="Table Of Data" 
+            component={TableOfData} 
+            options={
+              {
+                drawerIcon: (props) => (
+                  <Icon 
+                    source="file-table-box-outline"
+                    size={20}/>
+                )
+              }
+            }/>
         </Drawer.Navigator>
       </NavigationContainer>
     </PaperProvider>
