@@ -1,8 +1,8 @@
 import { ParamListBase, RouteProp } from '@react-navigation/native';
 import * as React from 'react';
-import { Image, View } from 'react-native';
+import { View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
-import { Avatar, Banner, Button, Card, MD3Colors  } from 'react-native-paper';
+import { Avatar, Button, Card, Modal, Portal } from 'react-native-paper';
 
 import { List, Text } from 'react-native-paper';
 
@@ -10,8 +10,14 @@ import { List, Text } from 'react-native-paper';
 export const GalleryTab = (props: {
     route: RouteProp<ParamListBase, "Gallery">;
     navigation: any;
-    // expandedHook: [boolean, React.Dispatch<React.SetStateAction<boolean>>]
+    modalVisibilityHook: [boolean, React.Dispatch<React.SetStateAction<boolean>>]
     }) => {
+
+        const [visible, setVisible] = props.modalVisibilityHook;
+
+        const showModal = () => setVisible(true);
+        const hideModal = () => setVisible(false);
+        const containerStyle = {backgroundColor: 'white', padding: 20};
 
         const LeftContent = (props: {
             size: number;
@@ -48,10 +54,23 @@ export const GalleryTab = (props: {
                             <Card.Cover source={{ uri: 'https://picsum.photos/700' }} />
                             <Card.Actions>
                                 <Button>Cancel</Button>
-                                <Button>Ok</Button>
+                                <Button onPress={showModal}>Ok</Button>
                             </Card.Actions>
                         </Card>)
                     }
+            <Portal>
+                <Modal visible={visible} onDismiss={hideModal} contentContainerStyle={containerStyle} style = {{margin: 20}}>
+                    <Text>Example Modal.  Click outside this area to dismiss.</Text>
+                    <View
+                          style={{
+                            flexDirection: "row",
+                            justifyContent: "flex-end"
+                          }}>
+                        <Button onPress={hideModal}>Close</Button>
+                        <Button onPress={hideModal}>Upload</Button>
+                    </View>
+                </Modal>
+            </Portal>
             </ScrollView>
         )
 };

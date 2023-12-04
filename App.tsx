@@ -14,17 +14,17 @@ export default function App() {
 
   const _handleSearch = () => console.log('Searching');
 
-  const _handleMore = () => {
+  const _handleOptions = () => {
     console.log('Shown more');
-    setVisible(true);
+    setMenuVisibility(true);
     console.log('Menu visible');
   };
 
-  const [visible, setVisible] = React.useState(false);
+  const [menuVisible, setMenuVisibility] = React.useState(false);
 
-  const openMenu = () => setVisible(true);
+  const openMenu = () => setMenuVisibility(true);
 
-  const closeMenu = () => setVisible(false);
+  const closeMenu = () => setMenuVisibility(false);
 
   const Drawer = createDrawerNavigator<ParamListBase>();
   // const navigation = useNavigation();
@@ -45,9 +45,9 @@ export default function App() {
           <Appbar.Content title="Title" />
           <Appbar.Action icon="magnify" onPress={_handleSearch} />
           <Menu
-            visible={visible}
+            visible={menuVisible}
             onDismiss={closeMenu}
-            anchor={<Appbar.Action icon="dots-vertical" onPress={_handleMore} />}
+            anchor={<Appbar.Action icon="dots-vertical" onPress={_handleOptions} />}
             style={{
               borderRadius: 30,
               overflow: 'hidden'
@@ -70,7 +70,7 @@ export default function App() {
   return (
     <PaperProvider>
       <NavigationContainer>
-        <Drawer.Navigator initialRouteName="TableOfData" screenOptions={{header: CustomHeader}}>
+        <Drawer.Navigator initialRouteName="My Tabs" screenOptions={{header: CustomHeader}}>
           <Drawer.Screen name="Home" component={Home} />
           <Drawer.Screen name="My Tabs" component={MyTabs} />
           <Drawer.Screen 

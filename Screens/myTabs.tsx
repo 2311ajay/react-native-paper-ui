@@ -29,6 +29,7 @@ const DummyTabComponent2 = (text: string) => {
 export default function MyTabs (props: any) {
 
     const switchHook = React.useState<boolean>(true);
+    const modalVisibilityHook = React.useState<boolean>(false);
     const expandedHook = React.useState(true);
 
     return (
@@ -41,7 +42,7 @@ export default function MyTabs (props: any) {
           <Tab.Screen
             name="Gallery"
             // component={DummyTabComponent} this is when the component does not need props
-            children = {(p) => GalleryTab({...p})}
+            children = {(p) => GalleryTab({...p, modalVisibilityHook})}
             options={{
               // tabBarLabel: 'Gallery',
               tabBarIcon: ({ color }) => (
