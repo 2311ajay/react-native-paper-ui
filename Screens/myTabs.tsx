@@ -33,11 +33,12 @@ export default function MyTabs (props: any) {
     const expandedHook = React.useState(true);
     const uploadProgressHook = React.useState<number>(0);
     const segmentedButtonHook = React.useState('');
+    const snackBarHook = React.useState(false);
 
 
     return (
         <Tab.Navigator
-          initialRouteName="Gallery"
+          initialRouteName="Notifications"
           activeColor="#f0edf6"
           inactiveColor="#3e2465"
           barStyle={{ backgroundColor: '#694fad' }}
@@ -66,7 +67,7 @@ export default function MyTabs (props: any) {
           />
           <Tab.Screen
             name="Notifications"
-            children = {(p) => NotificationTab({...p, switchHook })}
+            children = {(p) => NotificationTab({...p, switchHook, snackBarHook })}
             options={{
               tabBarLabel: 'Updates',
               tabBarIcon: ({ color }) => (

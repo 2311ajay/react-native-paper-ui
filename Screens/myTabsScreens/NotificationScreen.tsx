@@ -1,19 +1,26 @@
 import { StyleSheet, View } from 'react-native';
 import { ParamListBase, RouteProp } from '@react-navigation/native';
-import { Badge, IconButton, List, Paragraph, Switch, useTheme } from 'react-native-paper';
+import { Badge, IconButton, List, Paragraph, Switch, useTheme, Snackbar, Icon } from 'react-native-paper';
 import React from 'react';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
-
 
 
 export const NotificationTab = (props: {
     route: RouteProp<ParamListBase, "Notifications">;
     navigation: any;
-    switchHook: [boolean, React.Dispatch<React.SetStateAction<boolean>>]
+    switchHook: [boolean, React.Dispatch<React.SetStateAction<boolean>>];
+    snackBarHook: [boolean, React.Dispatch<React.SetStateAction<boolean>>];
     }
 ) => {
 
     const [visible, setVisible] = props.switchHook;
+
+    const [snackVisible, setSnackVisible] = props.snackBarHook;
+
+    const onToggleSnackBar = () => setSnackVisible(!snackVisible);
+  
+    const onDismissSnackBar = () => setSnackVisible(false);
+
     const {
     colors: { background },
     } = useTheme();
@@ -31,13 +38,13 @@ export const NotificationTab = (props: {
         <List.Section title="Text">
             <View style={styles.row}>
             <View style={styles.item}>
-            <IconButton icon="palette-swatch" size={36} style={styles.button} />
+            <IconButton icon="palette-swatch" size={36} style={styles.button} onPress={onToggleSnackBar}/>
             <Badge visible={visible} style={styles.badge}>
                 12
             </Badge>
             </View>
                 <View style={styles.item}>
-                    <IconButton icon="inbox" size={36} style={styles.button} />
+                    <IconButton icon="inbox" size={36} style={styles.button} onPress={onToggleSnackBar}/>
                     <Badge
                         visible={visible}
                         style={[styles.badge, { backgroundColor: Colors.blue500 }]}
@@ -50,15 +57,27 @@ export const NotificationTab = (props: {
         <List.Section title="Dot">
             <View style={styles.row}>
                 <View style={styles.item}>
-                    <IconButton icon="book-open" size={36} style={styles.button} />
+                    <IconButton icon="book-open" size={36} style={styles.button} onPress={onToggleSnackBar}/>
                     <Badge visible={visible} style={styles.badge} size={8} />
                 </View>
                 <View style={styles.item}>
-                <IconButton icon="receipt" size={36} style={styles.button} />
+                <IconButton icon="receipt" size={36} style={styles.button} onPress={onToggleSnackBar}/>
                 <Badge visible={visible} style={styles.badge} size={8} />
                 </View>
             </View>
         </List.Section>
+        <Snackbar
+            visible={snackVisible}
+            onDismiss={onDismissSnackBar}
+            icon={() => 
+                <Icon 
+                    source="notification-clear-all"
+                    color = 'white'
+                    size={40}/>}
+            onIconPress={() => console.log("Close snack bar")}
+            >  
+            Clear notification
+        </Snackbar>
     </View>
 );
 }
