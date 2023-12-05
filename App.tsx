@@ -70,7 +70,7 @@ export default function App() {
   return (
     <PaperProvider>
       <NavigationContainer>
-        <Drawer.Navigator initialRouteName="My Tabs" screenOptions={{header: CustomHeader}}>
+        <Drawer.Navigator initialRouteName="Home" screenOptions={{header: CustomHeader}}>
           <Drawer.Screen name="Home" component={Home} />
           <Drawer.Screen name="My Tabs" component={MyTabs} />
           <Drawer.Screen 
