@@ -32,6 +32,7 @@ export default function MyTabs (props: any) {
     const modalVisibilityHook = React.useState<boolean>(false);
     const expandedHook = React.useState(true);
     const uploadProgressHook = React.useState<number>(0);
+    const segmentedButtonHook = React.useState('');
 
 
     return (
@@ -75,7 +76,7 @@ export default function MyTabs (props: any) {
           />
           <Tab.Screen
             name="Profile"
-            children = {(p) => ProfileTab({...p, visibilityHook: expandedHook })}
+            children = {(p) => ProfileTab({...p, visibilityHook: expandedHook, segmentedButtonHook })}
             options={{
               tabBarLabel: 'Profile',
               tabBarIcon: ({ color }) => (

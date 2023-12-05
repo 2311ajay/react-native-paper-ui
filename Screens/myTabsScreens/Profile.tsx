@@ -2,14 +2,18 @@ import { ParamListBase, RouteProp } from '@react-navigation/native';
 import * as React from 'react';
 import { Image, View } from 'react-native';
 import { Banner, Button } from 'react-native-paper';
+import { SegmentedButtons } from 'react-native-paper';
+
 
 export const ProfileTab = (props: {
     route: RouteProp<ParamListBase, "Profile">;
     navigation: any;
-    visibilityHook: [boolean, React.Dispatch<React.SetStateAction<boolean>>]
+    visibilityHook: [boolean, React.Dispatch<React.SetStateAction<boolean>>];
+    segmentedButtonHook: [string, React.Dispatch<React.SetStateAction<string>>];
     }) => {
 
   const [visible, setVisible] = props.visibilityHook;
+  const [value, setValue] = props.segmentedButtonHook;
 
   return (
     <View>
@@ -41,6 +45,23 @@ export const ProfileTab = (props: {
         <Button onPress={() => {console.log("Show banner"); setVisible(true)}}>
             Show banner
         </Button>
+        <SegmentedButtons
+            value={value}
+            onValueChange={setValue}
+            buttons={[
+            {
+                value: 'walk',
+                label: 'Walking',
+                icon: 'walk'
+            },
+            {
+                value: 'train',
+                label: 'Transit',
+                icon:'train'
+            },
+            { value: 'drive', label: 'Driving', icon: 'car-back' },
+            ]}
+        />
     </View>
   );
 };
