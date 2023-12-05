@@ -34,11 +34,13 @@ export default function MyTabs (props: any) {
     const uploadProgressHook = React.useState<number>(0);
     const segmentedButtonHook = React.useState('');
     const snackBarHook = React.useState(false);
+    const passwordVisibilityHook = React.useState(false);
+    const passwordHook = React.useState('');
 
 
     return (
         <Tab.Navigator
-          initialRouteName="Notifications"
+          initialRouteName="Profile"
           activeColor="#f0edf6"
           inactiveColor="#3e2465"
           barStyle={{ backgroundColor: '#694fad' }}
@@ -77,7 +79,7 @@ export default function MyTabs (props: any) {
           />
           <Tab.Screen
             name="Profile"
-            children = {(p) => ProfileTab({...p, visibilityHook: expandedHook, segmentedButtonHook })}
+            children = {(p) => ProfileTab({...p, visibilityHook: expandedHook, segmentedButtonHook, passwordVisibilityHook, passwordHook })}
             options={{
               tabBarLabel: 'Profile',
               tabBarIcon: ({ color }) => (
