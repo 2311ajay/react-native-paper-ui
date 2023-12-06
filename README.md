@@ -15,14 +15,14 @@ Treat this repo as a reference to what different components can be provided by r
 
 ## Tech
 
-Dillinger uses a number of open source projects to work properly:
+This mini-project relies on some open source projects to work properly:
 - [react-native] - Develop once, deploy to Android and IOS!
 - [Hipo](https://github.com/Hipo/university-domains-list-api) - A simple publicly available API to test basic data fetching and pagination
 
 
 ## Installation
 
-Dillinger requires [Node.js](https://nodejs.org/) v10+ to run.
+This mini-project was built on [Node.js](https://nodejs.org/) v16.16.0 to run.
 
 Install the dependencies and devDependencies and start the server.
 
